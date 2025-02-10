@@ -7,6 +7,7 @@ from . import utils
 from .models import PredictedFrames, PredictedSubtitle
 from .opencv_adapter import Capture
 from paddleocr import PaddleOCR
+from tqdm.auto import tqdm
 
 
 class Video:
@@ -59,7 +60,7 @@ class Video:
             prev_grey = None
             predicted_frames = None
             modulo = frames_to_skip + 1
-            for i in range(num_ocr_frames):
+            for i in tqdm(range(num_ocr_frames)):
                 if i % modulo == 0:
                     frame = v.read()[1]
                     if not self.use_fullframe:
